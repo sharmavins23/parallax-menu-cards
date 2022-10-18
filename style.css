@@ -58,8 +58,6 @@ article {
     width: var(--card-width);
     height: var(--card-height);
 
-    border: 1px solid aliceblue;
-
     position: relative;
 
     /* Clip images properly */
@@ -88,6 +86,8 @@ article > .shadow {
     );
     opacity: 1;
     transition: opacity 2s var(--transition-shape);
+
+    z-index: 1;
 }
 
 article:hover > .shadow {
@@ -99,4 +99,12 @@ img {
     width: 1600px;
     height: 900px;
     object-fit: cover;
+
+    transform: scale(0.9);
+    transition: transform 4s var(--transition-shape);
+}
+
+article:hover > img {
+    transform: scale(1);
+    transition: transform 4s var(--transition-shape);
 }

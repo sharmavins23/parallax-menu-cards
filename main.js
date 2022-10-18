@@ -71,8 +71,7 @@ const cardWidth = () => {
     // Remove the "px" from the string and convert to a number
     let valNum = Number(valStr.slice(0, -2));
 
-    // Add 2 for border
-    return valNum + 2;
+    return valNum;
 }
 const cardHeight = () => {
     // Get the value as a string
@@ -81,6 +80,5 @@ const cardHeight = () => {
     // Remove the "px" from the string and convert to a number
     let valNum = Number(valStr.slice(0, -2));
 
-    // Add 2 for border
-    return valNum + 2;
+    return valNum;
 }
