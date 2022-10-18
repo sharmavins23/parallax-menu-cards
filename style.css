@@ -1,0 +1,10 @@
+html {
+    --bg-color: rgb(0, 0, 23);
+}
+
+body {
+    background-color: var(--bg-color);
+
+    margin: 0px;
+    padding: 0px;
+}
