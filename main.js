@@ -8,6 +8,40 @@ var scrollPos = 0;
 
 // On mouse wheel scroll...
 body.addEventListener('wheel', (e) => {
+    // Do the scroll handling
+    handleMouseScrolling(e);
+
+    // Also do the parallax image effect handling
+    handleImageParallax(e);
+});
+
+// Handle image parallax effects
+function handleImageParallax(e) {
+    // Compute the bounds for the parallax effect
+    let leftBound = -1 * (maxWidth() - (100 * vw())),
+        rightBound = 0,
+        boundWidth = rightBound - leftBound;
+
+    // Compute the percentage of the scroll position within the bounds
+    let scrollPct = (scrollPos - leftBound) / boundWidth;
+
+    // Map this down to a parallax effect range
+    const percentMax = 10;
+    const parallaxLeft = percentMax / 100,
+        parallaxRight = (-1 * percentMax) / 100,
+        parallaxWidth = parallaxRight - parallaxLeft;
+
+    let parallaxAmt = parallaxLeft + (scrollPct * parallaxWidth);
+
+    // Apply the parallax effect to every image
+    for (const card of cards) {
+        let img = card.getElementsByTagName("img")[0];
+        img.style.transform = `translateX(${parallaxAmt * 100}%)`;
+    }
+}
+
+// Handle mouse scrolling
+function handleMouseScrolling(e) {
     // Transform the scroll positioning based on a scale factor
     let scrollFactor = 1;
     let scrollAmt = scrollFactor * e.deltaY;
@@ -25,7 +59,7 @@ body.addEventListener('wheel', (e) => {
 
     // scrollPos -= scrollAmt;
     container.style.transform = `translateX(${scrollPos}px)`;
-});
+}
 
 // ====== Viewport sizing computations =========================================
 

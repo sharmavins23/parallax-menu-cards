@@ -1,5 +1,6 @@
 html {
     --bg-color: rgb(0, 0, 23);
+    --border-color: rgba(200, 200, 255, 0.8);
 
     /* Card sizing */
     --card-aspect-ratio: calc(4 / 3); /* 1.5 height / width */
@@ -23,10 +24,14 @@ html {
 
     /* Taken from the inspiration site */
     --transition-shape: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --text-color: aliceblue;
+    --svg-color: invert(100%) sepia(81%) saturate(2134%) hue-rotate(179deg)
+        brightness(111%) contrast(104%);
 }
 
 body {
-    background-color: var(--bg-color);
+    background: var(--bg-color);
 
     width: 100vw;
     height: 100vh;
@@ -37,7 +42,7 @@ body {
     display: flex;
     align-items: center;
 
-    color: aliceblue;
+    color: var(--text-color);
 
     overflow: hidden;
 }
@@ -50,7 +55,6 @@ body {
 
     gap: 2vw;
 
-    /* Taken from the inspiration site */
     transition: transform 2s var(--transition-shape);
 }
 
@@ -59,9 +63,6 @@ article {
     height: var(--card-height);
 
     position: relative;
-
-    /* Clip images properly */
-    overflow: hidden;
 
     display: flex;
     justify-content: center;
@@ -91,20 +92,189 @@ article > .shadow {
 }
 
 article:hover > .shadow {
-    opacity: 0.4;
+    opacity: 0.6;
     transition: opacity 2s var(--transition-shape);
 }
 
-img {
+article > .border {
+    content: "";
+
+    width: var(--card-width);
+    height: var(--card-height);
+
+    position: absolute;
+    top: -1px;
+    left: -1px;
+
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    transition: opacity 2s var(--transition-shape);
+
+    overflow: visible;
+
+    z-index: 10;
+}
+
+article:hover > .border {
+    opacity: 1;
+    transition: opacity 2s var(--transition-shape);
+}
+
+article > .img-holder {
+    width: var(--card-width);
+    height: var(--card-height);
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    overflow: hidden;
+
+    z-index: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+article > .img-holder > img {
     width: 1600px;
     height: 900px;
     object-fit: cover;
 
-    transform: scale(0.9);
-    transition: transform 4s var(--transition-shape);
+    scale: 0.9;
+
+    /* For parallax effect from JS */
+    transform: translateX(-10%);
+    transition: scale 4s var(--transition-shape),
+        transform 2s var(--transition-shape);
 }
 
-article:hover > img {
-    transform: scale(1);
-    transition: transform 4s var(--transition-shape);
+article:hover > .img-holder > img {
+    scale: 1;
+    transition: scale 4s var(--transition-shape),
+        transform 2s var(--transition-shape);
+}
+
+article > section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 0px;
+    padding: 0px;
+
+    z-index: 5;
+}
+
+article > section > .icon {
+    width: 100%;
+    height: 30%;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+article > section > .icon > img {
+    width: calc(var(--card-height) / 5);
+    max-width: 150px;
+    height: calc(var(--card-height) / 5);
+    max-height: 150px;
+
+    filter: var(--svg-color);
+    translate: 0% -25%;
+    opacity: 0%;
+
+    transition: opacity 2s var(--transition-shape),
+        translate 2s var(--transition-shape);
+}
+
+article:hover > section > .icon > img {
+    opacity: 100%;
+    translate: 0 10%;
+
+    transition: opacity 2s var(--transition-shape),
+        translate 2s var(--transition-shape);
+}
+
+article > section > .text {
+    width: 100%;
+    height: 70%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+article > section > .text > .h1-holder {
+    width: 100%;
+    height: 45%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+article > section > .text > .h1-holder > h1 {
+    margin: 0px;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-transform: uppercase;
+
+    opacity: 50%;
+    transition: opacity 2s var(--transition-shape);
+}
+
+article:hover > section > .text > .h1-holder > h1 {
+    opacity: 100%;
+    transition: opacity 2s var(--transition-shape);
+}
+
+article > section > .text > h2 {
+    margin: 0px;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+
+    opacity: 0;
+    transition: opacity 2s var(--transition-shape);
+}
+
+article:hover > section > .text > h2 {
+    opacity: 1;
+    transition: opacity 2s var(--transition-shape);
+}
+
+article > section > .text > p {
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+
+    opacity: 0;
+    transition: opacity 2s var(--transition-shape);
+}
+
+article:hover > section > .text > p {
+    opacity: 1;
+    transition: opacity 2s var(--transition-shape);
 }
