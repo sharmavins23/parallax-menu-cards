@@ -82,7 +82,7 @@ article > .shadow {
 
     background: radial-gradient(
         circle at 50% 50%,
-        rgba(0, 0, 0, 0.25) 0%,
+        rgba(0, 0, 0, 0.35) 0%,
         rgba(0, 0, 0, 0.75) 100%
     );
     opacity: 1;
@@ -92,7 +92,7 @@ article > .shadow {
 }
 
 article:hover > .shadow {
-    opacity: 0.6;
+    opacity: 0.7;
     transition: opacity 2s var(--transition-shape);
 }
 
@@ -215,43 +215,39 @@ article > section > .text {
 
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
-article > section > .text > .h1-holder {
-    width: 100%;
+article > section > .text > h1 {
     height: 45%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-article > section > .text > .h1-holder > h1 {
     margin: 0px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
 
     text-align: center;
     vertical-align: middle;
 
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: "Raleway";
+    font-size: clamp(2rem, 5vh, 3rem);
     text-transform: uppercase;
 
     opacity: 50%;
     transition: opacity 2s var(--transition-shape);
 }
 
-article:hover > section > .text > .h1-holder > h1 {
+article:hover > section > .text > h1 {
     opacity: 100%;
     transition: opacity 2s var(--transition-shape);
 }
 
 article > section > .text > h2 {
     margin: 0px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
 
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-family: "Raleway", serif;
+    font-size: clamp(0.8rem, 2vh, 1.5rem);
 
     opacity: 0;
     transition: opacity 2s var(--transition-shape);
@@ -265,10 +261,11 @@ article:hover > section > .text > h2 {
 article > section > .text > p {
     margin: 0px;
     margin-top: 10px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
 
-    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-family: "Raleway", serif;
+    font-size: clamp(0.9rem, 2vh, 1.5rem);
 
     opacity: 0;
     transition: opacity 2s var(--transition-shape);
